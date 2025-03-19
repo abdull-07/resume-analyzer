@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar';
 import AppRoutes from './routes/AppRoutes';
 import './App.css';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -9,9 +10,13 @@ function App() {
         <Navbar/>
       </header>
 
-      <main className="p-6">
+      <main>
         <AppRoutes/>
       </main>
+
+      <footer>
+        <Footer/>
+      </footer>
     </>
   );
 }

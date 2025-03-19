@@ -12,8 +12,13 @@ const Navbar = () => {
       {/* Navigation Links */}
       <div className="flex gap-6">
         <Link to="/" className="hover:text-blue-400 hover:underline">Home</Link>
-        <Link to="/resumebuilder" className="hover:text-blue-400 hover:underline">Resume Builder</Link>
-        <Link to="/coverletterbuilder" className="hover:text-blue-400 hover:underline">Cover Letter</Link>
+
+        {/* Show these links only when the user is signed in */}
+        <SignedIn>
+          <Link to="/resumebuilder" className="hover:text-blue-400 hover:underline">Resume Builder</Link>
+          <Link to="/coverletterbuilder" className="hover:text-blue-400 hover:underline">Cover Letter</Link>
+        </SignedIn>
+
         <Link to="/pricing" className="hover:text-blue-400 hover:underline">Pricing</Link>
       </div>
 
@@ -21,7 +26,9 @@ const Navbar = () => {
       <div>
         <SignedOut>
           <SignInButton>
-            <button className="px-4 py-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-500">Sign In</button>
+            <button className="px-4 py-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-500">
+              Get Started
+            </button>
           </SignInButton>
         </SignedOut>
 
