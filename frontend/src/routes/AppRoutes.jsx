@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
@@ -10,17 +11,21 @@ import SignUpPage from "../pages/auth/log-in/login";
  // Import the ProtectedRoute
 
 const AppRoutes = () => {
+  const {isSignedIn} = useAuth()
   return (
     <Routes>
-     <Route path="/" element={<Home/>} />
-     <Route path="/dashboard" element={<Dashboard />}/>
-     <Route path="/signin" element={<SignInPage />}/>
-     <Route path="/signup" element={<SignUpPage />}/>
+     {/* Rediret  /  to Dashboard if use logedIn otherwise show home page */}
+     <Route path="/" element={isSignedIn ? <Dashboard /> : <Home />} />
 
-     {/* Protacted Routes */}
-     <Route path="/resumebuilder" element={<ProtectedRoute><ResumeBuilder /></ProtectedRoute>} />
-     <Route path="/coverletterbuilder" element={<ProtectedRoute><CoverLetterBuilder /></ProtectedRoute>} />
-     
+
+     <Route path="/signin" element = {<SignInPage />} />
+     <Route path="/signup" element = {<SignUpPage />} />
+
+     {/* Protected Routes */}
+     <Route path="/ResumeBuilder" element = {<ResumeBuilder/>} />
+     <Route path="/CoverLetterBuilder" element = {<CoverLetterBuilder />} />
+
+
      <Route path="/pricing" element={<Pricing />}/>
     </Routes>
   );

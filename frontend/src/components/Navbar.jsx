@@ -24,13 +24,14 @@ const Navbar = () => {
 
       {/* Authentication Buttons */}
       <div>
-        <SignedOut>
-          <SignInButton>
-            <button className="px-4 py-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-700 transition-all duration-500">
-              Get Started
-            </button>
-          </SignInButton>
-        </SignedOut>
+        
+        <Link to="/signup">
+        <button className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+          Get Started
+        </button>
+        </Link>
+          
+        
 
         <SignedIn>
           {/* User Profile Dropdown (Clerk) */}

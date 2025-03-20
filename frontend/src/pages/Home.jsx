@@ -1,33 +1,13 @@
-import { SignedOut, SignInButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import Testimonials from "../components/Testimonials";
+import CTAction from "../components/Call-to-Action";
+import Features from "../components/Features";
 import React from 'react'
 
 const Home = () => {
+
   return (
     <>
-      {/* -------------------------------------------------------------------- Heoor Section -------------------------------------------------------------------- */}
-      {/* <div className="py-6 text-3xl font-bold text-blue-600 h-[85vh] flex items-center justify-center bg-lavender"> */}
-      {/* <div className='w-[50%]'> */}
-      {/* <h4 className="text-xl text-black px-5 big-shoulders">Customizable & ATS-friendly templates</h4> */}
-      {/* <h1 className="text-3xl text-black px-5 py-2 poppins-bold-italic">Stand Out. Get Hired. Succeed.</h1> */}
-      {/* <p className="text-xl text-black px-5 poppins-extralight-italic">Your resume is your first impression. Make it count with AI-assisted writing, formatting, and optimization for better job opportunities.</p> */}
-      {/* <div className='flex justify-center items-center p-5 gap-10 buttons'> */}
-      {/* <SignedOut> */}
-      {/* <SignInButton> */}
-      {/* <Link to="/resumebuilder"><button className="bg-blue-500 text-white rounded-md text-base px-4 py-2 hover:bg-transparent hover:text-blue-500 hover:border border-blue-300 big-shoulderst">Create My Resume</button></Link> */}
-      {/* </SignInButton> */}
-      {/* </SignedOut> */}
-      {/* <SignedOut> */}
-      {/* <SignInButton> */}
-      {/* <button className="border border-blue-300 text-blue-500 rounded-md text-base px-4 py-2 hover:bg-blue-500 hover:text-white hover:border-0 big-shoulders">Get Started</button> */}
-      {/* </SignInButton> */}
-      {/* </SignedOut> */}
-      {/* </div> */}
-      {/* </div> */}
-      {/* <div className='w-[50%] text-center'> */}
-      {/* <h4 className="text-xl text-blue-500 p-5">Customizable & ATS-friendly templates</h4> */}
-      {/* </div> */}
-      {/* </div> */}
 
       <section className="bg-gray-100 text-center py-20 px-6">
         <div className="py-20 px-6">
@@ -57,6 +37,10 @@ const Home = () => {
         </div>
       </section>
 
+      <section>
+        <CTAction />
+      </section>
+      
       <section className="py-16 px-6 bg-white">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
           {/* Text Section */}
@@ -121,6 +105,16 @@ const Home = () => {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section>
+        <Testimonials />
+      </section>
+
+
+
+      <section>
+        <Features />
       </section>
     </>
   )
