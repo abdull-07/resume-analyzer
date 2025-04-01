@@ -1,4 +1,5 @@
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
         
         {/* Company Info */}
         <div>
-          <h3 className="text-2xl font-bold mb-4">ResumeBuilder</h3>
+          <h3 className="text-2xl font-bold mb-4">WAres</h3>
           <p className="text-gray-400">
             Create professional resumes and cover letters effortlessly.  
             <span className="font-semibold"> It’s completely free!</span>
@@ -18,10 +19,10 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-400 hover:text-white transition">Home</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white transition">Features</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white transition">Pricing</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white transition">Contact</a></li>
+            <li><Link to="/" className="text-gray-400 hover:text-white transition">Home</Link></li>
+            <li><Link to="/features" className="text-gray-400 hover:text-white transition">Features</Link></li>
+            <li><Link to="/pricing" className="text-gray-400 hover:text-white transition">Pricing</Link></li>
+            <li><Link to="/contect" className="text-gray-400 hover:text-white transition">Contact</Link></li>
           </ul>
         </div>
 

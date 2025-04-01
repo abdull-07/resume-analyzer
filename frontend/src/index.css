@@ -181,3 +181,7 @@
 .bg-egg-white {
     background-color: #FDFDFD;
 }
+
+button:hover{
+    cursor: pointer;
+}

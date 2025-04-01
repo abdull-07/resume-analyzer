@@ -24,14 +24,23 @@ const Navbar = () => {
 
       {/* Authentication Buttons */}
       <div>
-        
-        <Link to="/signup">
-        <button className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
-          Get Started
-        </button>
-        </Link>
-          
-        
+
+        <SignedOut>
+          <div className="flex gap-4">
+            <Link to="/signin">  {/* Corrected route */}
+              <button className="px-[10px] py-[5px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+                SignIn
+              </button>
+            </Link>
+
+            <Link to="/signup">  {/* Corrected route */}
+              <button className="px-[10px] py-[5px] bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition">
+                SignUp
+              </button>
+            </Link>
+          </div>
+        </SignedOut>
+
 
         <SignedIn>
           {/* User Profile Dropdown (Clerk) */}

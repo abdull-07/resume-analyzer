@@ -3,6 +3,9 @@ import Testimonials from "../components/Testimonials";
 import CTAction from "../components/Call-to-Action";
 import Features from "../components/Features";
 import React from 'react'
+import HIW from "../components/How-It-Works";
+import FAQ from "../components/FAQ";
+import PTS from "../components/PTS";
 
 const Home = () => {
 
@@ -20,11 +23,11 @@ const Home = () => {
             Get professionally formatted, ATS-friendly resumes and personalized cover letters that make recruiters take notice.
           </p>
           <div className="mt-6 flex justify-center gap-4">
-                <Link to="/resumebuilder">
-                  <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
-                    Start My Resume
-                  </button>
-                </Link>
+            <Link to="/resumebuilder">
+              <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+                Start My Resume
+              </button>
+            </Link>
             <Link to="/coverletterbuilder">
               <button className="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition">
                 Generate Cover Letter
@@ -40,7 +43,7 @@ const Home = () => {
       <section>
         <CTAction />
       </section>
-      
+
       <section className="py-16 px-6 bg-white">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
           {/* Text Section */}
@@ -115,6 +118,18 @@ const Home = () => {
 
       <section>
         <Features />
+      </section>
+
+      <section>
+        <HIW />
+      </section>
+
+      <section>
+        <FAQ />
+      </section>
+
+      <section>
+        <PTS />
       </section>
     </>
   )
