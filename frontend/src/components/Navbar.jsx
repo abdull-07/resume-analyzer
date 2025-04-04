@@ -15,8 +15,8 @@ const Navbar = () => {
 
         {/* Show these links only when the user is signed in */}
         <SignedIn>
-          <Link to="/resumebuilder" className="hover:text-blue-400 hover:underline">Resume Builder</Link>
-          <Link to="/coverletterbuilder" className="hover:text-blue-400 hover:underline">Cover Letter</Link>
+          {/* <Link to="/resumebuilder" className="hover:text-blue-400 hover:underline">Resume Builder</Link> */}
+          {/* <Link to="/coverletterbuilder" className="hover:text-blue-400 hover:underline">Cover Letter</Link> */}
         </SignedIn>
 
         <Link to="/pricing" className="hover:text-blue-400 hover:underline">Pricing</Link>

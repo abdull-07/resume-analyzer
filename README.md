@@ -6,14 +6,12 @@ AI Resume Analyzer is a MERN stack web application that allows users to create A
 
 ### 🔹 Key Features
 
-- ✅ Drag-and-Drop Resume Builder – Customize your resume sections easily.
-- ✅ AI Resume Scoring – Analyze resumes for ATS compatibility.
-- ✅ Job-Specific Optimization – Get keyword suggestions for job descriptions.
-- ✅ AI-Powered Summarization – Generate professional resume summaries.
-- ✅ Export Options – Download resumes as PDF, DOCX, TXT.
-- ✅ Secure Authentication – Login with JWT & OAuth (Google, LinkedIn).
-- ✅ Subscription Plans – Unlock premium AI features with Stripe payments.
-
+- ✅ Interactive Resume Builder – Easy-to-use section-based resume creation
+- ✅ AI-Powered Content Generation – Get professional suggestions for each section
+- ✅ Real-time Preview – See your changes instantly
+- ✅ Multiple Resume Sections – Comprehensive resume building
+- ✅ Export Options – Download in various formats (Coming Soon)
+- ✅ Mobile Responsive Design – Works on all devices
 
 ## 📂 Project Structure
 🚧 **Coming Soon:**
