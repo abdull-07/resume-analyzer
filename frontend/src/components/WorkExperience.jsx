@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBriefcase, FaTrash } from 'react-icons/fa';
 import { getAiSuggestions } from '../utils/aiService';
+import { useResume } from '../context/ResumeContext';
 
 const WorkExperience = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [experiences, setExperiences] = useState([]);
@@ -14,6 +16,13 @@ const WorkExperience = () => {
   const [endDate, setEndDate] = useState('');
   const [isPresent, setIsPresent] = useState(false);
   const [description, setDescription] = useState('');
+
+  // Load existing work experience data from context
+  useEffect(() => {
+    if (resumeData.workExperience) {
+      setExperiences(resumeData.workExperience);
+    }
+  }, [resumeData.workExperience]);
 
   const handleAiSuggestions = async () => {
     setLoading(true);
@@ -51,7 +60,10 @@ Now, generate a similar description for this work experience.`);
         endDate: isPresent ? 'Present' : endDate,
         description,
       };
-      setExperiences([...experiences, newExperience]);
+      const updatedExperiences = [...experiences, newExperience];
+      setExperiences(updatedExperiences);
+      // Update context
+      updateResumeData('workExperience', updatedExperiences);
       // Reset form
       setCompanyName('');
       setJobTitle('');
@@ -65,7 +77,12 @@ Now, generate a similar description for this work experience.`);
   };
 
   const handleDeleteExperience = (experienceId) => {
-    setExperiences(experiences.filter(experience => experience.id !== experienceId));
+    const updatedExperiences = experiences.filter(
+      experience => experience.id !== experienceId
+    );
+    setExperiences(updatedExperiences);
+    // Update context
+    updateResumeData('workExperience', updatedExperiences);
   };
 
   return (

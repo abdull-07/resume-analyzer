@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTools, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Skill = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [skillName, setSkillName] = useState('');
   const [proficiency, setProficiency] = useState('Beginner');
   const [skills, setSkills] = useState([]);
+
+  // Load existing skills data from context
+  useEffect(() => {
+    if (resumeData.skills) {
+      setSkills(resumeData.skills);
+    }
+  }, [resumeData.skills]);
 
   const handleAddSkill = (e) => {
     e.preventDefault();
@@ -15,7 +24,10 @@ const Skill = () => {
         name: skillName.trim(),
         proficiency
       };
-      setSkills([...skills, newSkill]);
+      const updatedSkills = [...skills, newSkill];
+      setSkills(updatedSkills);
+      // Update context
+      updateResumeData('skills', updatedSkills);
       // Reset form
       setSkillName('');
       setProficiency('Beginner');
@@ -23,7 +35,10 @@ const Skill = () => {
   };
 
   const handleDeleteSkill = (skillId) => {
-    setSkills(skills.filter(skill => skill.id !== skillId));
+    const updatedSkills = skills.filter(skill => skill.id !== skillId);
+    setSkills(updatedSkills);
+    // Update context
+    updateResumeData('skills', updatedSkills);
   };
 
   return (

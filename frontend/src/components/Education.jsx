@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGraduationCap, FaTrash } from "react-icons/fa";
 import { getAiSuggestions } from "../utils/aiService";
+import { useResume } from "../context/ResumeContext";
 
 const Education = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [educations, setEducations] = useState([]);
@@ -15,6 +17,13 @@ const Education = () => {
   const [endDate, setEndDate] = useState("");
   const [isPresent, setIsPresent] = useState(false);
   const [description, setDescription] = useState("");
+
+  // Load existing education data from context when component mounts
+  useEffect(() => {
+    if (resumeData.education) {
+      setEducations(resumeData.education);
+    }
+  }, [resumeData.education]);
 
   const handleAiSuggestions = async () => {
     setLoading(true);
@@ -54,7 +63,10 @@ Now, generate a similar description.`);
         endDate: isPresent ? "Present" : endDate,
         description,
       };
-      setEducations([...educations, newEducation]);
+      const updatedEducations = [...educations, newEducation];
+      setEducations(updatedEducations);
+      // Update context
+      updateResumeData('education', updatedEducations);
       // Reset form
       setInstitution("");
       setField("");
@@ -69,7 +81,12 @@ Now, generate a similar description.`);
   };
 
   const handleDeleteEducation = (educationId) => {
-    setEducations(educations.filter((education) => education.id !== educationId));
+    const updatedEducations = educations.filter(
+      (education) => education.id !== educationId
+    );
+    setEducations(updatedEducations);
+    // Update context
+    updateResumeData('education', updatedEducations);
   };
 
   return (

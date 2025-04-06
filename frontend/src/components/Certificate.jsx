@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCertificate, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Certificate = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [certificates, setCertificates] = useState([]);
   const [certName, setCertName] = useState('');
   const [issuer, setIssuer] = useState('');
   const [issueDate, setIssueDate] = useState('');
   const [certUrl, setCertUrl] = useState('');
+
+  useEffect(() => {
+    if (resumeData.certificates) {
+      setCertificates(resumeData.certificates);
+    }
+  }, [resumeData.certificates]);
 
   const handleAddCertificate = (e) => {
     e.preventDefault();
@@ -19,7 +27,9 @@ const Certificate = () => {
         issueDate,
         url: certUrl.trim()
       };
-      setCertificates([...certificates, newCertificate]);
+      const updatedCertificates = [...certificates, newCertificate];
+      setCertificates(updatedCertificates);
+      updateResumeData('certificates', updatedCertificates);
       // Reset form
       setCertName('');
       setIssuer('');
@@ -28,8 +38,10 @@ const Certificate = () => {
     }
   };
 
-  const handleDeleteCertificate = (certificateId) => {
-    setCertificates(certificates.filter(cert => cert.id !== certificateId));
+  const handleDeleteCertificate = (certId) => {
+    const updatedCertificates = certificates.filter(cert => cert.id !== certId);
+    setCertificates(updatedCertificates);
+    updateResumeData('certificates', updatedCertificates);
   };
 
   return (

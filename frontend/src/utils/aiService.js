@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_Token = import.meta.env.REACT_APP_HUGGINGFACE_KEY; // Use environment variable
-const API_URL = import.meta.env.REACT_APP_HUGGINGFACE_URL // Use environment variable
+const API_Token = import.meta.env.VITE_HUGGINGFACE_KEY;
+const API_URL = import.meta.env.VITE_HUGGINGFACE_URL;
 
 if (!API_Token) {
     console.error("Hugging Face API token is missing. Please check your .env file.");
@@ -10,7 +10,7 @@ if (!API_Token) {
 export const getAiSuggestions = async (text) => {
     try {
         const response = await axios.post(
-            API_URL, // Use environment variable
+            API_URL,
             { inputs: text },
             {
                 headers: {
@@ -20,7 +20,6 @@ export const getAiSuggestions = async (text) => {
             }
         );
 
-        // Ensure response structure is valid
         if (response.data && response.data.generated_text) {
             return response.data.generated_text;
         } else {

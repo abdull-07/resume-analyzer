@@ -1,68 +1,47 @@
-import React, { useState } from 'react';
-import { FaCode, FaTrash } from 'react-icons/fa';
-import { getAiSuggestions } from '../utils/aiService';
+import React, { useState, useEffect } from 'react';
+import { FaFolder, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Projects = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [projectName, setProjectName] = useState('');
   const [technologies, setTechnologies] = useState('');
-  const [projectUrl, setProjectUrl] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [isPresent, setIsPresent] = useState(false);
   const [description, setDescription] = useState('');
+  const [projectUrl, setProjectUrl] = useState('');
 
-  const handleAiSuggestions = async () => {
-    setLoading(true);
-    const aiText = await getAiSuggestions(`Write a professional and concise project description for a resume based on these details:
-- Project Name: ${projectName}
-- Technologies Used: ${technologies}
-- Duration: ${startDate} to ${isPresent ? 'Present' : endDate}
-
-The description should:
-- Highlight the project's purpose and impact
-- Emphasize technical challenges overcome
-- Include quantifiable achievements
-- Showcase your role and contributions
-- Be concise and impactful
-
-Example output:
-"Developed a full-stack e-commerce platform using React and Node.js, implementing secure payment processing and real-time inventory management. Improved user experience resulting in 40% increase in customer retention."
-
-Now, generate a similar description for the given project.`);
-
-    setDescription(aiText || 'No suggestions available. Please try again.');
-    setLoading(false);
-  };
+  useEffect(() => {
+    if (resumeData.projects) {
+      setProjects(resumeData.projects);
+    }
+  }, [resumeData.projects]);
 
   const handleAddProject = (e) => {
     e.preventDefault();
-    if (projectName && technologies) {
+    if (projectName.trim()) {
       const newProject = {
         id: Date.now(),
-        name: projectName,
-        technologies,
-        url: projectUrl,
-        startDate,
-        endDate: isPresent ? 'Present' : endDate,
-        description
+        name: projectName.trim(),
+        technologies: technologies.trim(),
+        description: description.trim(),
+        url: projectUrl.trim()
       };
-      setProjects([...projects, newProject]);
+      const updatedProjects = [...projects, newProject];
+      setProjects(updatedProjects);
+      updateResumeData('projects', updatedProjects);
       // Reset form
       setProjectName('');
       setTechnologies('');
-      setProjectUrl('');
-      setStartDate('');
-      setEndDate('');
-      setIsPresent(false);
       setDescription('');
+      setProjectUrl('');
     }
   };
 
   const handleDeleteProject = (projectId) => {
-    setProjects(projects.filter(project => project.id !== projectId));
+    const updatedProjects = projects.filter(project => project.id !== projectId);
+    setProjects(updatedProjects);
+    updateResumeData('projects', updatedProjects);
   };
 
   return (
@@ -72,7 +51,7 @@ Now, generate a similar description for the given project.`);
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center space-x-3">
-          <FaCode className="text-gray-600 text-4xl" />
+          <FaFolder className="text-gray-600 text-4xl" />
           <h2 className="text-lg font-semibold">Projects</h2>
         </div>
         <span className="text-gray-600 text-lg">{isOpen ? '▲' : '▼'}</span>
@@ -87,10 +66,7 @@ Now, generate a similar description for the given project.`);
                 <div key={project.id} className="flex items-center justify-between p-3 border rounded">
                   <div className="flex-grow">
                     <h3 className="font-medium">{project.name}</h3>
-                    <p className="text-sm text-gray-600">
-                      {project.startDate} - {project.endDate}
-                    </p>
-                    <p className="text-sm text-purple-600">{project.technologies}</p>
+                    <p className="text-sm text-gray-600">{project.technologies}</p>
                     {project.url && (
                       <a 
                         href={project.url}
@@ -149,40 +125,6 @@ Now, generate a similar description for the given project.`);
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Start Date</label>
-                <input
-                  type="month"
-                  className="w-full p-2 border rounded"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">End Date</label>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="month"
-                    className="w-full p-2 border rounded"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    disabled={isPresent}
-                    required={!isPresent}
-                  />
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={isPresent}
-                      onChange={() => setIsPresent(!isPresent)}
-                    />
-                    Present
-                  </label>
-                </div>
-              </div>
-            </div>
-
             <div>
               <textarea
                 rows="4"
@@ -192,16 +134,6 @@ Now, generate a similar description for the given project.`);
                 onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
-              <div className="flex gap-2 mt-2">
-                <button
-                  type="button"
-                  className="ml-auto bg-purple-500 text-white p-2 rounded"
-                  onClick={handleAiSuggestions}
-                  disabled={loading}
-                >
-                  {loading ? 'Loading...' : '+ AI Suggestions'}
-                </button>
-              </div>
             </div>
 
             <button

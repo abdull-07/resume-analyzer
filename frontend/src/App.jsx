@@ -1,11 +1,12 @@
 import Navbar from './components/Navbar';
 import AppRoutes from './routes/AppRoutes';
+import Footer from './components/footer'; 
+import { LoaderProvider } from './context/LoaderContext';
 import './App.css';
-import Footer from './components/footer';
 
 function App() {
   return (
-    <>
+    <LoaderProvider>
       <header className="flex justify-between items-center bg-gray-800 text-white">
         <Navbar/>
       </header>
@@ -17,7 +18,7 @@ function App() {
       <footer>
         <Footer/>
       </footer>
-    </>
+    </LoaderProvider>
   );
 }
 

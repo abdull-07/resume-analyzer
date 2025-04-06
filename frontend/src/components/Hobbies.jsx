@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { FaGamepad, FaTrash } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaHeart, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Hobbies = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [hobbies, setHobbies] = useState([]);
   const [hobbyName, setHobbyName] = useState('');
+
+  useEffect(() => {
+    if (resumeData.hobbies) {
+      setHobbies(resumeData.hobbies);
+    }
+  }, [resumeData.hobbies]);
 
   const handleAddHobby = (e) => {
     e.preventDefault();
@@ -13,14 +21,17 @@ const Hobbies = () => {
         id: Date.now(),
         name: hobbyName.trim()
       };
-      setHobbies([...hobbies, newHobby]);
-      // Reset form
+      const updatedHobbies = [...hobbies, newHobby];
+      setHobbies(updatedHobbies);
+      updateResumeData('hobbies', updatedHobbies);
       setHobbyName('');
     }
   };
 
   const handleDeleteHobby = (hobbyId) => {
-    setHobbies(hobbies.filter(hobby => hobby.id !== hobbyId));
+    const updatedHobbies = hobbies.filter(hobby => hobby.id !== hobbyId);
+    setHobbies(updatedHobbies);
+    updateResumeData('hobbies', updatedHobbies);
   };
 
   return (
@@ -30,7 +41,7 @@ const Hobbies = () => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center space-x-3">
-          <FaGamepad className="text-gray-600 text-4xl" />
+          <FaHeart className="text-gray-600 text-4xl" />
           <h2 className="text-lg font-semibold">Hobbies & Interests</h2>
         </div>
         <span className="text-gray-600 text-lg">{isOpen ? '▲' : '▼'}</span>

@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBullseye, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Goals = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [goals, setGoals] = useState([]);
   const [goalText, setGoalText] = useState('');
   const [type, setType] = useState('Short Term');
+
+  // Load existing goals from context
+  useEffect(() => {
+    if (resumeData.goals) {
+      setGoals(resumeData.goals);
+    }
+  }, [resumeData.goals]);
 
   const handleAddGoal = (e) => {
     e.preventDefault();
@@ -15,7 +24,10 @@ const Goals = () => {
         text: goalText.trim(),
         type
       };
-      setGoals([...goals, newGoal]);
+      const updatedGoals = [...goals, newGoal];
+      setGoals(updatedGoals);
+      // Update context
+      updateResumeData('goals', updatedGoals);
       // Reset form
       setGoalText('');
       setType('Short Term');
@@ -23,7 +35,10 @@ const Goals = () => {
   };
 
   const handleDeleteGoal = (goalId) => {
-    setGoals(goals.filter(goal => goal.id !== goalId));
+    const updatedGoals = goals.filter(goal => goal.id !== goalId);
+    setGoals(updatedGoals);
+    // Update context
+    updateResumeData('goals', updatedGoals);
   };
 
   return (

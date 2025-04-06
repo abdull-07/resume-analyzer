@@ -1,33 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMedal, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Awards = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [awards, setAwards] = useState([]);
   const [awardTitle, setAwardTitle] = useState('');
   const [issuer, setIssuer] = useState('');
   const [date, setDate] = useState('');
 
-  const handleAddAward = (e) => {
-    e.preventDefault();
-    if (awardTitle.trim() && issuer.trim()) {
-      const newAward = {
-        id: Date.now(),
-        title: awardTitle.trim(),
-        issuer: issuer.trim(),
-        date
-      };
-      setAwards([...awards, newAward]);
-      // Reset form
-      setAwardTitle('');
-      setIssuer('');
-      setDate('');
-    }
-  };
 
-  const handleDeleteAward = (awardId) => {
-    setAwards(awards.filter(award => award.id !== awardId));
-  };
+  useEffect(()=>{
+    if (resumeData.awards) {
+      setAwards(resumeData.awards);
+    }
+  },[resumeData.awards]);
+
+
+  const handleAddAward = (e) => {
+  e.preventDefault();
+  if (awardTitle.trim() && issuer.trim()) {
+    const newAward = {
+      id: Date.now(),
+      title: awardTitle.trim(),
+      issuer: issuer.trim(),
+      date
+    };
+    const updatedAwards = [...awards, newAward];
+    setAwards(updatedAwards);
+    updateResumeData('awards', updatedAwards); // Use the new array directly
+    // Reset form
+    setAwardTitle('');
+    setIssuer('');
+    setDate('');
+  }
+};
+
+const handleDeleteAward = (awardId) => {
+  const updatedAwards = awards.filter(award => award.id !== awardId);
+  setAwards(updatedAwards);
+  updateResumeData('awards', updatedAwards); // Add this line
+};
+
 
   return (
     <div className="bg-white p-4 rounded-xl shadow-md w-full">

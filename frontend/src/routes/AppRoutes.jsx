@@ -14,14 +14,16 @@ import FAQ from "../pages/FAQ";
 import SuccessStories from "../pages/SuccessStories";
 import TemplatesGallery from "../pages/TemplatesGallery";
 import Features from "../pages/Features";
-import Contect from "../pages/Contect";
+import Contact from "../pages/Contact";
 import ResumeAnalizer from "../pages/ResumeAnalizer";
 import { UserProfile } from "@clerk/clerk-react";
+import { useRouteTransition } from '../hooks/useRouteTransition'; // Import the useRouteTransition hook
 
 // Import the ProtectedRoute
 
 const AppRoutes = () => {
   const { isSignedIn } = useAuth()
+  useRouteTransition(); // Call the useRouteTransition hook to enable route transitions
   return (
     <Routes>
       {/* Rediret  /  to Dashboard if use logedIn otherwise show home page */}
@@ -45,7 +47,7 @@ const AppRoutes = () => {
       <Route path="/templates-gallery" element={<TemplatesGallery />} />
       <Route path="/features" element={<Features />} />
       <Route path="/user-profile" element={<UserProfile />} />
-      <Route path="/contect" element={<Contect />} />
+      <Route path="/contact" element={<Contact />} />
       
 
 

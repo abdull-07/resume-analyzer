@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaTrophy, FaTrash } from 'react-icons/fa';
+import { useResume } from '../context/ResumeContext';
 
 const Achievements = () => {
+  const { resumeData, updateResumeData } = useResume();
   const [isOpen, setIsOpen] = useState(false);
   const [achievements, setAchievements] = useState([]);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+
+  useEffect(() => {
+    if (resumeData.achievements) {
+      setAchievements(resumeData.achievements);
+    }
+  }, [resumeData.achievements]);
 
   const handleAddAchievement = (e) => {
     e.preventDefault();
@@ -15,15 +23,24 @@ const Achievements = () => {
         title: title.trim(),
         date
       };
-      setAchievements([...achievements, newAchievement]);
+      // Update the achievements state
+      const updatedAchievements = [...achievements, newAchievement];
+      setAchievements(updatedAchievements);
+  
+      // Update context with the updated achievements array
+      updateResumeData('achievements', updatedAchievements);
+  
       // Reset form
       setTitle('');
       setDate('');
     }
   };
+  
 
   const handleDeleteAchievement = (achievementId) => {
-    setAchievements(achievements.filter(achievement => achievement.id !== achievementId));
+    const updatedAchievements = achievements.filter(achievement => achievement.id !== achievementId);
+    setAchievements(updatedAchievements);
+    updateResumeData('achievements', updatedAchievements); // Update context after deleting
   };
 
   return (
