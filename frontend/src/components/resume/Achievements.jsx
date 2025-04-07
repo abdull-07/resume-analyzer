@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { FaTrophy, FaTrash } from 'react-icons/fa';
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../../context/ResumeContext';
 
 const Achievements = () => {
   const { resumeData, updateResumeData } = useResume();

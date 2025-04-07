@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaBullseye, FaTrash } from 'react-icons/fa';
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../../context/ResumeContext';
 
 const Goals = () => {
   const { resumeData, updateResumeData } = useResume();

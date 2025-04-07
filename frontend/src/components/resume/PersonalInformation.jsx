@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGlobe } from 'react-icons/fa';
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../../context/ResumeContext';
 
 const PersonalInformation = () => {
   const { resumeData, updateResumeData } = useResume();
@@ -56,7 +56,6 @@ const PersonalInformation = () => {
         <form onSubmit={handleSubmit} className="mt-4 space-y-4 p-4 border rounded-lg bg-gray-50">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">First Name</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaUser className="text-gray-400" />
@@ -67,13 +66,12 @@ const PersonalInformation = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   className="pl-10 w-full p-2 border rounded"
-                  placeholder="John"
+                  placeholder="First Name"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Last Name</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaUser className="text-gray-400" />
@@ -84,7 +82,7 @@ const PersonalInformation = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   className="pl-10 w-full p-2 border rounded"
-                  placeholder="Doe"
+                  placeholder="Last Name"
                   required
                 />
               </div>
@@ -93,7 +91,6 @@ const PersonalInformation = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaEnvelope className="text-gray-400" />
@@ -110,7 +107,6 @@ const PersonalInformation = () => {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Phone</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaPhone className="text-gray-400" />
@@ -129,7 +125,6 @@ const PersonalInformation = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Address</label>
             <div className="mt-1 relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <FaMapMarkerAlt className="text-gray-400" />
@@ -140,7 +135,7 @@ const PersonalInformation = () => {
                 value={formData.address}
                 onChange={handleChange}
                 className="pl-10 w-full p-2 border rounded"
-                placeholder="123 Main St, City, Country"
+                placeholder="Address: 123 Main St, City, Country"
                 required
               />
             </div>

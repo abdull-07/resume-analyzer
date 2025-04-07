@@ -1,5 +1,5 @@
 import React from 'react';
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../../context/ResumeContext';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGlobe } from 'react-icons/fa';
 
 const ResumePreview = () => {

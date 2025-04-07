@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaFolder, FaTrash } from 'react-icons/fa';
-import { useResume } from '../context/ResumeContext';
+import { useResume } from '../../context/ResumeContext';
 
 const Projects = () => {
   const { resumeData, updateResumeData } = useResume();

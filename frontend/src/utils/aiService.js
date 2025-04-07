@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios";  
 
 const API_Token = import.meta.env.VITE_HUGGINGFACE_KEY;
 const API_URL = import.meta.env.VITE_HUGGINGFACE_URL;

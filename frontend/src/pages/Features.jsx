@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaRegEdit, FaRobot, FaMobileAlt, FaFileDownload, FaPuzzlePiece, FaEye } from 'react-icons/fa';
 
-function Features() {
+const Features = () => {
   const features = [
     {
       icon: <FaRegEdit className="w-12 h-12 text-purple-500" />,
