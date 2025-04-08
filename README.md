@@ -14,7 +14,7 @@ AI Resume Analyzer is a MERN stack web application that allows users to create A
 - ✅ Mobile Responsive Design – Works on all devices
 
 ## 📂 Project Structure
-🚧 **Coming Soon:**
+🚧 **See [Folder Structure](https://github.com/abdull-07/resume-analyzer/blob/main/FolderStructure)**
 
 
 ## 🛠️ Installation & Setup
