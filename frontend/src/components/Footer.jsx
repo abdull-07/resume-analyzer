@@ -5,12 +5,12 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-10">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+
         {/* Company Info */}
         <div>
           <h3 className="text-2xl font-bold mb-4">WAres</h3>
           <p className="text-gray-400">
-            Create professional resumes and cover letters effortlessly.  
+            Create professional resumes and cover letters effortlessly.
             <span className="font-semibold"> It’s completely free!</span>
           </p>
         </div>
@@ -43,8 +43,13 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="text-center text-gray-500 mt-8 border-t border-gray-700 pt-4">
-        &copy; {new Date().getFullYear()} WAres. All rights reserved.
+      <div className="flex border-t border-gray-700 mt-8 p-4 justify-between items-center max-w-6xl mx-auto px-6">
+        <div className="text-center text-gray-500">
+          &copy; {new Date().getFullYear()} WAres. All rights reserved.
+        </div>
+        <div className="text-center text-gray-500">
+         Made With ❤ by WAres
+        </div>
       </div>
     </footer>
   );

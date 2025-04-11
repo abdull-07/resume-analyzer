@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { FaBars, FaTimes, FaFileAlt, FaHome } from "react-icons/fa";
 
 const Sidebar = ({ setActiveSection }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <aside className={`bg-gray-900 text-white h-screen p-4 transition-all ${collapsed ? "w-16" : "w-64"}`}>
+    <aside className={`bg-gray-900 text-white p-4 transition-all ${collapsed ? "w-16" : "w-64"}`}>
       <button onClick={() => setCollapsed(!collapsed)} className="text-xl mb-4">
         {collapsed ? <FaBars /> : <FaTimes />}
       </button>

@@ -23,12 +23,12 @@ const Home = () => {
             Get professionally formatted, ATS-friendly resumes and personalized cover letters that make recruiters take notice.
           </p>
           <div className="mt-6 flex justify-center gap-4">
-            <Link to="/resumebuilder">
+            <Link to="/resume-builder">
               <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
                 Start My Resume
               </button>
             </Link>
-            <Link to="/coverletterbuilder">
+            <Link to="/coverletter-builder">
               <button className="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition">
                 Generate Cover Letter
               </button>
@@ -60,7 +60,7 @@ const Home = () => {
               <li>✅ One-Click Download in Multiple Formats (PDF, DOCX, TXT)</li>
               <li>✅ AI Resume Score & Improvement Suggestions</li>
             </ul>
-            <Link to="/resumebuilder">
+            <Link to="/resume-builder">
               <button className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
                 Create My Resume
               </button>
@@ -101,7 +101,7 @@ const Home = () => {
               <li>✅ Professionally Designed Templates</li>
               <li>✅ Job-Specific Customization & Formatting</li>
             </ul>
-            <Link to="/coverletterbuilder">
+            <Link to="/coverletter-builder">
               <button className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
                 Generate Cover Letter
               </button>

@@ -16,6 +16,8 @@ import TemplatesGallery from "../pages/TemplatesGallery";
 import Features from "../pages/Features";
 import Contact from "../pages/Contact";
 import ResumeAnalizer from "../pages/ResumeAnalizer";
+import ResumeFeedback from "../pages/Feedback"; 
+import CVBuilder from "../pages/CVBuilder";
 import { UserProfile } from "@clerk/clerk-react";
 import { useRouteTransition } from '../hooks/useRouteTransition'; // Import the useRouteTransition hook
 
@@ -34,9 +36,10 @@ const AppRoutes = () => {
       <Route path="/signup" element={<SignUpPage />} />
 
       {/* Protected Routes */}
-      <Route path="/ResumeBuilder" element={<ResumeBuilder />} />
-      <Route path="/CoverLetterBuilder" element={<CoverLetterBuilder />} />
-      <Route path="/ResumeAnalizer" element={<ResumeAnalizer />} />
+      <Route path="/resume-builder" element={<ResumeBuilder />} />
+      <Route path="/cv-builder" element={<CVBuilder />} />
+      <Route path="/coverletter-builder" element={<CoverLetterBuilder />} />
+      <Route path="/resume-analizer" element={<ResumeAnalizer />} />
 
 
       <Route path="/pricing" element={<Pricing />} />
@@ -47,6 +50,7 @@ const AppRoutes = () => {
       <Route path="/templates-gallery" element={<TemplatesGallery />} />
       <Route path="/features" element={<Features />} />
       <Route path="/user-profile" element={<UserProfile />} />
+      <Route path="/feedback" element={<ResumeFeedback />} />
       <Route path="/contact" element={<Contact />} />
       
 
