@@ -15,10 +15,11 @@ import { ResumeProvider } from '../context/ResumeContext'
 const ResumeBuilder = () => {
   return (
     <ResumeProvider>
-      <div className="p-6 flex">
-        <div className="w-1/2">
-          <h1 className="text-3xl font-bold text-blue-600 mb-6">Resume Builder</h1>
-          <div className="space-y-6">
+      <div className="p-4 md:p-6 flex flex-col lg:flex-row">
+        {/* Form Section */}
+        <div className="w-full lg:w-1/2 lg:pr-6 mb-6 lg:mb-0">
+          <h1 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 md:mb-6">Resume Builder</h1>
+          <div className="space-y-4 md:space-y-6">
             <PersonalInformation />
             <Education />
             <WorkExperience/>
@@ -31,9 +32,13 @@ const ResumeBuilder = () => {
             <Goals/>
           </div>
         </div>
-        <div className="border-r border-gray-500 mx-6"></div>
-        <div className='w-1/2'>
-          <h1 className="text-3xl font-bold text-blue-600 mb-6">Resume Preview</h1>
+
+        {/* Divider - Horizontal on mobile, Vertical on desktop */}
+        <div className="border-b border-gray-300 my-4 lg:border-r lg:border-b-0 lg:mx-6 lg:my-0"></div>
+
+        {/* Preview Section */}
+        <div className='w-full lg:w-1/2 lg:pl-6'>
+          <h1 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 md:mb-6">Resume Preview</h1>
           <ResumePreview />
         </div>
       </div>

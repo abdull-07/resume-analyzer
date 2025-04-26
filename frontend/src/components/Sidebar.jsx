@@ -15,7 +15,7 @@ const Sidebar = ({ setActiveSection }) => {
           <FaHome /> {!collapsed && "Dashboard"}
         </button>
         <button onClick={() => setActiveSection("documents")} className="flex items-center gap-2 hover:text-blue-400">
-          <FaFileAlt /> {!collapsed && "My Documents"}
+          <FaFileAlt /> {!collapsed && "All Documents"}
         </button>
       </nav>
     </aside>
