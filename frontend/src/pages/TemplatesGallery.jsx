@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import { FiFileText, FiFile, FiMail } from 'react-icons/fi';
-import { FaRegStar, FaDownload } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FiFileText, FiFile, FiMail, FiEdit, FiX } from 'react-icons/fi';
+import { FaRegStar} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const TemplatesGallery = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('resume');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    templateType: 'resume',
+    requirements: ''
+  });
 
   // Sample template data
   const templates = {
@@ -13,7 +22,6 @@ const TemplatesGallery = () => {
         name: 'Modern Professional',
         category: 'Creative',
         preview: '/templates/resume-modern.jpg',
-        downloads: '12.5k',
         rating: 4.8
       },
       {
@@ -21,7 +29,6 @@ const TemplatesGallery = () => {
         name: 'Executive',
         category: 'Corporate',
         preview: '/templates/resume-executive.jpg',
-        downloads: '8.2k',
         rating: 4.6
       },
       {
@@ -29,7 +36,6 @@ const TemplatesGallery = () => {
         name: 'Minimalist',
         category: 'Simple',
         preview: '/templates/resume-minimal.jpg',
-        downloads: '15.7k',
         rating: 4.9
       }
     ],
@@ -39,7 +45,6 @@ const TemplatesGallery = () => {
         name: 'Academic',
         category: 'Research',
         preview: '/templates/cv-academic.jpg',
-        downloads: '5.3k',
         rating: 4.7
       },
       {
@@ -47,7 +52,6 @@ const TemplatesGallery = () => {
         name: 'Medical',
         category: 'Healthcare',
         preview: '/templates/cv-medical.jpg',
-        downloads: '3.8k',
         rating: 4.5
       }
     ],
@@ -57,7 +61,6 @@ const TemplatesGallery = () => {
         name: 'Classic',
         category: 'Formal',
         preview: '/templates/coverletter-classic.jpg',
-        downloads: '7.1k',
         rating: 4.6
       },
       {
@@ -65,11 +68,62 @@ const TemplatesGallery = () => {
         name: 'Contemporary',
         category: 'Creative',
         preview: '/templates/coverletter-contemporary.jpg',
-        downloads: '9.4k',
         rating: 4.7
       }
     ]
   };
+
+  const handleTemplateSelect = (template, type) => {
+    switch (type) {
+      case 'resume':
+        navigate('/resume-builder', { state: { templateId: template.id } });
+        break;
+      case 'cv':
+        navigate('/cv-builder', { state: { templateId: template.id } });
+        break;
+      case 'coverletter':
+        navigate('/coverletter-builder', { state: { templateId: template.id } });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleRequestSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send this data to your backend
+    console.log('Template request:', formData);
+    // Reset form and close modal
+    setFormData({
+      name: '',
+      email: '',
+      templateType: 'resume',
+      requirements: ''
+    });
+    setIsModalOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Add useEffect to manage body scroll
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -136,12 +190,13 @@ const TemplatesGallery = () => {
                     <FaRegStar className="mr-1" />
                     <span className="text-sm font-medium">{template.rating}</span>
                   </div>
-                  <div className="text-sm text-gray-500">
-                    {template.downloads} downloads
-                  </div>
                 </div>
-                <button className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
-                  <FaDownload />
+                {/* Modify the Use Template button */}
+                <button 
+                  onClick={() => handleTemplateSelect(template, activeTab)}
+                  className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
+                  <FiEdit />
                   Use This Template
                 </button>
               </div>
@@ -151,12 +206,113 @@ const TemplatesGallery = () => {
 
         {/* CTA */}
         <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold text-gray-900 mb-3">Can't find what you're looking for?</h3>
-          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            Can't find what you're looking for?
+          </h3>
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
             Request Custom Template
           </button>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 bg-white bg-opacity-10 flex items-center justify-center z-50 overflow-hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsModalOpen(false);
+            }
+          }}
+        >
+          <div 
+            className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Existing modal header */}
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold">Request Custom Template</h3>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
+            </div>
+            
+            {/* Existing form content */}
+            <form onSubmit={handleRequestSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Template Type
+                </label>
+                <select
+                  name="templateType"
+                  value={formData.templateType}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                >
+                  <option value="resume">Resume</option>
+                  <option value="cv">CV</option>
+                  <option value="coverletter">Cover Letter</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Requirements
+                </label>
+                <textarea
+                  name="requirements"
+                  value={formData.requirements}
+                  onChange={handleInputChange}
+                  rows="4"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  required
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+              >
+                Submit Request
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

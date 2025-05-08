@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
 
-      <section className="bg-gray-100 text-center py-20 px-6">
+      <setion className="bg-gray-100 text-center py-20 px-6">
         <div className="py-20 px-6">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
             Build a Job-Winning Resume & Cover Letter <br />
@@ -25,7 +25,7 @@ const Home = () => {
           <div className="mt-6 flex justify-center gap-4">
             <Link to="/resume-builder">
               <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
-                Start My Resume
+                Generate My Resume
               </button>
             </Link>
             <Link to="/coverletter-builder">
@@ -33,12 +33,13 @@ const Home = () => {
                 Generate Cover Letter
               </button>
             </Link>
+
           </div>
           <p className="mt-6 text-sm text-gray-500">
             Trusted by thousands of job seekers to land their dream job.
           </p>
         </div>
-      </section>
+      </setion>
 
       <section>
         <CTAction />
@@ -113,7 +114,6 @@ const Home = () => {
       <section>
         <Testimonials />
       </section>
-
 
 
       <section>
