@@ -34,6 +34,7 @@ const Navbar = () => {
             </SignedIn>
 
             <Link to="/features" className="text-gray-700 hover:text-blue-400 hover:underline">Features</Link>
+            <Link to="/templates-gallery" className="text-gray-700 hover:text-blue-400 hover:underline">Templates</Link>
             <Link to="/faq" className="text-gray-700 hover:text-blue-400 hover:underline">FAQ</Link>
             <Link to="/contact" className="text-gray-700 hover:text-blue-400 hover:underline">Contact</Link>
 

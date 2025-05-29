@@ -1,10 +1,21 @@
-import React from 'react';
-import { FaFileAlt, FaDownload, FaTrash, FaEdit } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaFileAlt, FaDownload, FaTrash, FaEdit, FaTimes } from 'react-icons/fa';
 import { FiPlus, FiUpload, FiCpu } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 const MyCVs = () => {
     const navigate = useNavigate();
+    const [showAIForm, setShowAIForm] = useState(false);
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        experience: '',
+        education: '',
+        research: '',
+        publications: '',
+        achievements: ''
+    });
+    const [loading, setLoading] = useState(false);
     const cvs = [
         { id: 1, name: "Academic CV", date: "2025-04-01" },
         { id: 2, name: "Research CV", date: "2025-03-30" },
@@ -15,11 +26,10 @@ const MyCVs = () => {
     };
 
     const handleCreateWithAI = () => {
-        navigate('/cv-ai-generator');
+        setShowAIForm(true);
     };
 
     const handleUploadCV = () => {
-        // Implement upload functionality
         console.log('Upload CV');
     };
 
@@ -33,6 +43,26 @@ const MyCVs = () => {
 
     const handleEdit = (id) => {
         console.log(`Editing CV ${id}`);
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            // Call your AI API here
+            const response = await generateCVWithAI(formData);
+            
+            // Navigate to CV builder with the generated data
+            navigate('/cv-builder', {
+                state: { cvData: response }
+            });
+        } catch (error) {
+            console.error('Error generating CV:', error);
+        } finally {
+            setLoading(false);
+            setShowAIForm(false);
+        }
     };
 
     return (
@@ -114,6 +144,155 @@ const MyCVs = () => {
                     </div>
                 )}
             </div>
+
+            {/* AI Generation Form Modal */}
+            {showAIForm && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] flex flex-col">
+                        {/* Modal Header - Fixed */}
+                        <div className="p-6 border-b">
+                            <button 
+                                onClick={() => setShowAIForm(false)}
+                                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                            >
+                                <FaTimes className="w-5 h-5" />
+                            </button>
+
+                            <h2 className="text-xl font-semibold">Generate CV with AI</h2>
+                            <p className="text-gray-600 mt-2">
+                                Please provide your academic and professional information to help AI generate your CV.
+                            </p>
+                        </div>
+
+                        {/* Form Content - Scrollable */}
+                        <div className="p-6 overflow-y-auto flex-1">
+                            <form onSubmit={handleFormSubmit} className="space-y-4">
+                                {/* Required Fields */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={formData.fullName}
+                                            onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                                            className="w-full p-2 border rounded-md"
+                                            placeholder="Dr. John Doe"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                            className="w-full p-2 border rounded-md"
+                                            placeholder="john@university.edu"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Professional Experience
+                                        </label>
+                                        <textarea
+                                            required
+                                            value={formData.experience}
+                                            onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                                            className="w-full p-2 border rounded-md"
+                                            rows="3"
+                                            placeholder="Your academic and professional experience..."
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Education & Qualifications
+                                        </label>
+                                        <textarea
+                                            required
+                                            value={formData.education}
+                                            onChange={(e) => setFormData({...formData, education: e.target.value})}
+                                            className="w-full p-2 border rounded-md"
+                                            rows="3"
+                                            placeholder="Your academic qualifications..."
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Optional Fields */}
+                                <div className="pt-4 mt-4 border-t border-gray-200">
+                                    <p className="text-sm text-gray-500 mb-4">Optional Information</p>
+                                    
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Research Experience (Optional)
+                                            </label>
+                                            <textarea
+                                                value={formData.research}
+                                                onChange={(e) => setFormData({...formData, research: e.target.value})}
+                                                className="w-full p-2 border rounded-md"
+                                                rows="3"
+                                                placeholder="Your research experience and interests..."
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Publications (Optional)
+                                            </label>
+                                            <textarea
+                                                value={formData.publications}
+                                                onChange={(e) => setFormData({...formData, publications: e.target.value})}
+                                                className="w-full p-2 border rounded-md"
+                                                rows="3"
+                                                placeholder="List your key publications..."
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Achievements & Awards (Optional)
+                                            </label>
+                                            <textarea
+                                                value={formData.achievements}
+                                                onChange={(e) => setFormData({...formData, achievements: e.target.value})}
+                                                className="w-full p-2 border rounded-md"
+                                                rows="3"
+                                                placeholder="Notable achievements and awards..."
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* Modal Footer - Fixed */}
+                        <div className="p-6 border-t">
+                            <button
+                                type="submit"
+                                form="cvForm"
+                                disabled={loading}
+                                className={`w-full py-2 px-4 rounded-md text-white font-medium
+                                    ${loading 
+                                        ? 'bg-gray-400 cursor-not-allowed' 
+                                        : 'bg-blue-600 hover:bg-blue-700'
+                                    }
+                                `}
+                            >
+                                {loading ? 'Generating...' : 'Generate CV'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

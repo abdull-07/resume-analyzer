@@ -37,6 +37,13 @@ const TemplatesGallery = () => {
         category: 'Simple',
         preview: '/templates/resume-minimal.jpg',
         rating: 4.9
+      },
+      {
+        id: 4,
+        name: 'ATS Optimized',
+        category: 'Professional',
+        preview: '/templates/resume-ats.jpg',
+        rating: 4.7
       }
     ],
     cv: [
@@ -76,7 +83,16 @@ const TemplatesGallery = () => {
   const handleTemplateSelect = (template, type) => {
     switch (type) {
       case 'resume':
-        navigate('/resume-builder', { state: { templateId: template.id } });
+        if (template.id === 4) { // ATS template ID
+          navigate('/resume-builder', { 
+            state: { 
+              templateId: template.id,
+              templateName: 'ATS Optimized'
+            } 
+          });
+        } else {
+          navigate('/resume-builder', { state: { templateId: template.id } });
+        }
         break;
       case 'cv':
         navigate('/cv-builder', { state: { templateId: template.id } });

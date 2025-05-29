@@ -14,14 +14,14 @@ const MyCoverLetters = () => {
         navigate('/coverletter-builder');
     };
 
-    const handleCreateWithAI = () => {
-        navigate('/coverletter-ai-generator');
-    };
+    // const handleCreateWithAI = () => {
+    //     navigate('/coverletter-ai-generator');
+    // };
 
-    const handleUploadCoverLetter = () => {
-        // Implement upload functionality
-        console.log('Upload Cover Letter');
-    };
+    // const handleUploadCoverLetter = () => {
+    //     // Implement upload functionality
+    //     console.log('Upload Cover Letter');
+    // };
 
     const handleDownload = (id) => {
         console.log(`Downloading Cover Letter ${id}`);
@@ -50,23 +50,23 @@ const MyCoverLetters = () => {
                         <span className="text-sm text-gray-500">Write your cover letter step by step</span>
                     </button>
 
-                    <button
-                        onClick={handleCreateWithAI}
-                        className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors group"
-                    >
-                        <FiCpu className="w-8 h-8 mb-3 text-gray-400 group-hover:text-purple-500" />
-                        <span className="font-medium text-gray-900">Generate with AI</span>
-                        <span className="text-sm text-gray-500">Let AI help write your cover letter</span>
-                    </button>
+                     {/* <button
+                         onClick={handleCreateWithAI}
+                         className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors group"
+                     >
+                         <FiCpu className="w-8 h-8 mb-3 text-gray-400 group-hover:text-purple-500" />
+                         <span className="font-medium text-gray-900">Generate with AI</span>
+                         <span className="text-sm text-gray-500">Let AI help write your cover letter</span>
+                     </button>
 
-                    <button
-                        onClick={handleUploadCoverLetter}
-                        className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors group"
-                    >
-                        <FiUpload className="w-8 h-8 mb-3 text-gray-400 group-hover:text-green-500" />
-                        <span className="font-medium text-gray-900">Upload Existing</span>
-                        <span className="text-sm text-gray-500">Import your existing cover letter</span>
-                    </button>
+                     <button
+                         onClick={handleUploadCoverLetter}
+                         className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors group"
+                     >
+                         <FiUpload className="w-8 h-8 mb-3 text-gray-400 group-hover:text-green-500" />
+                         <span className="font-medium text-gray-900">Upload Existing</span>
+                         <span className="text-sm text-gray-500">Import your existing cover letter</span>
+                     </button> */}
                 </div>
             </div>
 
