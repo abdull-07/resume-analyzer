@@ -99,4 +99,4 @@ This project is licensed under the <a href="https://github.com/abdull-07/resume-
 Feel free to open an issue on GitHub or contact me for support! 🚀 -->
 
 
-I will complete this project soon.
+There is some isses with this project, I will complete this project soon.
