@@ -1,4 +1,4 @@
-# Resume Analyzer
+<!-- # Resume Analyzer
 
 ## 🚀 Project Overview
 
@@ -96,4 +96,7 @@ npm run dev
 This project is licensed under the <a href="https://github.com/abdull-07/resume-analyzer/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)</a> .
 
 ## 🎯 Need Help?
-Feel free to open an issue on GitHub or contact me for support! 🚀
+Feel free to open an issue on GitHub or contact me for support! 🚀 -->
+
+
+I will complete this project soon.

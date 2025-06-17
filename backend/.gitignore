@@ -1,21 +1,2 @@
-# Node.js related
 node_modules/
-
-# Logs
-*.log
-
-# Environment variables
 .env
-
-# Package lock files (optional)
-package-lock.json
-
-# OS specific files
-.DS_Store  # macOS
-Thumbs.db  # Windows
-
-# Build directories
-/dist
-
-# Temporary files
-*.tmp
